@@ -3,56 +3,56 @@ import User from "../models/User.js";
 
 const router = Router();
 
-// CREATE - POST /api/users
+// CREATE 
 router.post("/", async (req, res) => {
   try {
     const user = await User.create(req.body);
     return res.status(201).json(user);
   } catch (err) {
-    return res.status(400).json({ error: "Erro ao criar usuário", details: err.message });
+    return res.status(400).json({ error: "Erro ao criar pedido", details: err.message });
   }
 });
 
-// READ (lista) - GET /api/users
+// READ  
 router.get("/", async (_req, res) => {
   try {
     const users = await User.find().sort({ createdAt: -1 });
     return res.json(users);
   } catch (err) {
-    return res.status(500).json({ error: "Erro ao buscar usuários" });
+    return res.status(500).json({ error: "Erro ao buscar pedido" });
   }
 });
 
-// READ (um) - GET /api/users/:id
+// READ Único
 router.get("/:id", async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
-    if (!user) return res.status(404).json({ error: "Usuário não encontrado" });
+    if (!user) return res.status(404).json({ error: "Pedido não encontrado" });
     return res.json(user);
   } catch (err) {
     return res.status(400).json({ error: "ID inválido" });
   }
 });
 
-// UPDATE - PUT /api/users/:id
+// UPDATE 
 router.put("/:id", async (req, res) => {
   try {
     const user = await User.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true
     });
-    if (!user) return res.status(404).json({ error: "Usuário não encontrado" });
+    if (!user) return res.status(404).json({ error: "Pedido não encontrado" });
     return res.json(user);
   } catch (err) {
     return res.status(400).json({ error: "Erro ao atualizar", details: err.message });
   }
 });
 
-// DELETE - DELETE /api/users/:id
+// DELETE 
 router.delete("/:id", async (req, res) => {
   try {
     const user = await User.findByIdAndDelete(req.params.id);
-    if (!user) return res.status(404).json({ error: "Usuário não encontrado" });
+    if (!user) return res.status(404).json({ error: "Pedido não encontrado" });
     return res.status(204).send();
   } catch (err) {
     return res.status(400).json({ error: "ID inválido" });
