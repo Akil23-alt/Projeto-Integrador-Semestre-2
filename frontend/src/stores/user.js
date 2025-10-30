@@ -235,3 +235,4 @@ router.delete('/users/:id', JWTUtils.authenticateToken, (req, res) => {
 })
 
 module.exports = router
+})
