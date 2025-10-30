@@ -34,4 +34,3 @@ app.mount('#app')
 // Restaurando a sessão do usuário (se existir)
 // Isso é importante para manter o usuário logado quando ele recarrega a página
 const authStore = useAuthStore()
-authStore.restoreSession()
