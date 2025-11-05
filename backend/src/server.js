@@ -4,6 +4,7 @@ import morgan from "morgan";
 import {config} from "dotenv";
 import {connectDB} from "./config/config_banco.js";
 import usersRouter from "./routes/users.routes.js";
+import pedidoRouter from "./routes/pedido.routes.js"
 
 config ();
 const app = express();
@@ -19,6 +20,8 @@ app.get("/api/health",(_req, res) => {
 });
 
 app.use("/api/users", usersRouter);
+app.use("/api/pedido", pedidoRouter);
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

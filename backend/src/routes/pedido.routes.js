@@ -1,13 +1,13 @@
 import { Router } from "express";
-import User from "../models/User.js";
+import Pedido from "../models/Pedido.js";
 
 const router = Router();
 
 // CREATE 
 router.post("/", async (req, res) => {
   try {
-    const user = await User.create(req.body);
-    return res.status(201).json(user);
+    const pedido = await Pedido.create(req.body);
+    return res.status(201).json(pedido);
   } catch (err) {
     return res.status(400).json({ error: "Erro ao criar pedido", details: err.message });
   }
@@ -16,8 +16,8 @@ router.post("/", async (req, res) => {
 // READ  
 router.get("/", async (_req, res) => {
   try {
-    const users = await User.find().sort({ createdAt: -1 });
-    return res.json(users);
+    const pedidos = await Pedido.find().sort({ createdAt: -1 });
+    return res.json(pedidos);
   } catch (err) {
     return res.status(500).json({ error: "Erro ao buscar pedido" });
   }
@@ -26,9 +26,9 @@ router.get("/", async (_req, res) => {
 // READ Único
 router.get("/:id", async (req, res) => {
   try {
-    const user = await User.findById(req.params.id);
-    if (!user) return res.status(404).json({ error: "Pedido não encontrado" });
-    return res.json(user);
+    const pedido = await Pedido.findById(req.params.id);
+    if (!pedido) return res.status(404).json({ error: "Pedido não encontrado" });
+    return res.json(pedido);
   } catch (err) {
     return res.status(400).json({ error: "ID inválido" });
   }
@@ -37,12 +37,12 @@ router.get("/:id", async (req, res) => {
 // UPDATE 
 router.put("/:id", async (req, res) => {
   try {
-    const user = await User.findByIdAndUpdate(req.params.id, req.body, {
+    const pedido = await Pedido.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true
     });
-    if (!user) return res.status(404).json({ error: "Pedido não encontrado" });
-    return res.json(user);
+    if (!pedido) return res.status(404).json({ error: "Pedido não encontrado" });
+    return res.json(pedido);
   } catch (err) {
     return res.status(400).json({ error: "Erro ao atualizar", details: err.message });
   }
@@ -51,8 +51,8 @@ router.put("/:id", async (req, res) => {
 // DELETE 
 router.delete("/:id", async (req, res) => {
   try {
-    const user = await User.findByIdAndDelete(req.params.id);
-    if (!user) return res.status(404).json({ error: "Pedido não encontrado" });
+    const pedido = await Pedido.findByIdAndDelete(req.params.id);
+    if (!pedido) return res.status(404).json({ error: "Pedido não encontrado" });
     return res.status(204).send();
   } catch (err) {
     return res.status(400).json({ error: "ID inválido" });
