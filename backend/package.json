@@ -3,9 +3,12 @@
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
+    "last": "^1.1.0",
     "mongoose": "^8.18.2",
     "mongose": "^0.0.2-security",
-    "morgan": "^1.10.1"
+    "morgan": "^1.10.1",
+    "node-opcua": "^2.158.0",
+    "version": "^0.1.2"
   },
   "scripts": {
     "dev": "node --env-file=.env src/server.js",

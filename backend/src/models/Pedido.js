@@ -7,8 +7,7 @@ const PedidoSchema = new mongoose.Schema(
         aprovacao: { type: Boolean, required: true},
         status: { type: String, required: true},
         ordem: { type: Number, required: true},
-        quantidade: { type: Number, required: true},
-        criadoEm: { type: Date, default: Date.now}
+        quantidade: { type: Number, required: true}
         //Verificar se falta adicionar informações como a do 
     },
     { timestamps: true } // Carimbo de data e hora do cadastro
