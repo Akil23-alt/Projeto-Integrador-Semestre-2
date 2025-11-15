@@ -22,13 +22,9 @@ mongoose.connect(process.env.MONGO_URI)
 
 //Import rotas
 const usersRouter = require('./routes/users.routes');
-const pedidoRouter = require('./routes/pedido.routes');
-const produtoRouter = require('./routes/produto.routes');
 
 // Rotas
 app.use("/api/users", usersRouter);
-app.use("/api/pedido", pedidoRouter);
-app.use("/api/produto", produtoRouter);
 
 
 // Iniciando serv
