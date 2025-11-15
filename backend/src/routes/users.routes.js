@@ -1,7 +1,7 @@
 // Etapa 6 - Rotas de Autenticação
 const express = require('express');
 const router = express.Router();
-const authController = require('../controllers/authController');
+const authController = require('../controllers/clienteController');
 
 // POST /api/auth/register - Registrar novo usuário
 router.post('/register', authController.register);

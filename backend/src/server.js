@@ -1,28 +1,37 @@
 import express from "express";
 import cors from "cors";
 import morgan from "morgan";
-import {config} from "dotenv";
-import {connectDB} from "./config/config_banco.js";
-import usersRouter from "./routes/users.routes.js";
-import pedidoRouter from "./routes/pedido.routes.js"
+import { createRequire } from "module";
 
-config ();
+
+const require = createRequire(import.meta.url);
+require('dotenv').config();
+
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
 
-await connectDB();
+const mongoose = require('mongoose');
 
-app.get("/api/health",(_req, res) => {
-    res.json({status: "ok", env : process.env.NODE_ENV || "dev"});
-});
+// Conexão com MongoDB
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log('✅ MongoDB conectado com sucesso!'))
+  .catch(err => console.error('❌ Erro ao conectar MongoDB:', err));
 
+//Import rotas
+const usersRouter = require('./routes/users.routes');
+const pedidoRouter = require('./routes/pedido.routes');
+const produtoRouter = require('./routes/produto.routes');
+
+// Rotas
 app.use("/api/users", usersRouter);
 app.use("/api/pedido", pedidoRouter);
+app.use("/api/produto", produtoRouter);
 
 
+// Iniciando serv
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`API está rodando em http://localhost:${PORT} !!!`)
